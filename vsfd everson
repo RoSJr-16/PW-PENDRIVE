@@ -1,0 +1,300 @@
+openapi: 3.0.4
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: |-
+    Projeto criado para treinar o uso do swagger editor
+ 
+    Some useful links:
+    - [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)
+    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
+  termsOfService: https://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.12
+externalDocs:
+  description: Find out more about Swagger
+  url: https://swagger.io
+servers:
+  - url: https:localhost:3000/api_produtos/v1
+tags:
+  - name: categoria
+    description: Everything about your Pets
+    externalDocs:
+      description: Find out more
+      url: https://swagger.io
+  - name: cliente
+    description: Access to Petstore orders
+    externalDocs:
+      description: Find out more about our store
+      url: https://swagger.io
+  - name: produto
+    description: Operations about user
+ 
+paths:
+  /categoria:
+    get:
+      tags:
+        - categoria
+      summary: buscar categorias
+      description: Buscar as categorias cadastradas no banco de dados
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+    post:
+      tags:
+        - categoria
+      summary: Criar uma categoria.
+      description: Cria uma categoria nova no banco de dados
+      requestBody:
+        description: Criar categoria
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Categoria'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+    put:
+      tags:
+        - categoria
+      summary: Atualizar uma categoria.
+      description: Atualizar uma categoria existente
+      requestBody:
+        description: Modificar uma categoria que já existe no banco de dados
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Categoria'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '400':
+          description: Numero de categoria não existe
+        '404':
+          description: Categoria não encontrada not found
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+                
+  /categoria/{id}:
+    delete:
+      tags:
+        - categoria
+      summary: deletar uma categoria
+      description: deletar uma categoria presente na base de dados
+      parameters:
+        - name: id
+          in: path
+          description: Pet id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Categoria deletada
+        '400':
+          description: id de categoria inexistente
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      tags:
+        - categoria
+      summary: Encontrar categoria por  id.
+      description: Buscar categoria na base de dados por ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID of pet to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+                
+  /cliente:
+    get:
+      tags:
+      - cliente
+      summary: buscar cliente
+      description: Buscar os cliente cadastradas no banco de dados
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+    post:
+      tags:
+      - cliente
+      summary: Criar uma categoria.
+      description: Cria uma categoria nova no banco de dados
+      requestBody:
+        description: Criar categoria
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Categoria'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+                
+    put:
+      tags:
+        - cliente
+      summary: Atualizar uma categoria.
+      description: Atualizar uma categoria existente
+      requestBody:
+        description: Modificar uma categoria que já existe no banco de dados
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Categoria'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '400':
+          description: Numero de categoria não existe
+        '404':
+          description: Categoria não encontrada not found
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+               
+  /cliente/{id}: 
+    delete:
+      tags:
+        - cliente
+      summary: deletar uma categoria
+      description: deletar uma categoria presente na base de dados
+      parameters:
+        - name: id
+          in: path
+          description: Pet id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Categoria deletada
+        '400':
+          description: id de categoria inexistente
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+                
+    get:
+      tags:
+        - cliente
+      summary: Encontrar categoria por  id.
+      description: Buscar categoria na base de dados por ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID of pet to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        
+components:
+  schemas:
+    Categoria:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 198772
+        nome:
+          type: string
+          description: 'Categoria dos produtos'
+          example: 10
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
